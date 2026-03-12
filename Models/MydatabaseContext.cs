@@ -78,8 +78,9 @@ public partial class MydatabaseContext : DbContext
     public DbSet<PlWarning> PLWarnings { get; set; }
 
 
-
+    
     public DbSet<Empl_Master> Empl_Master { get; set; }
+    public DbSet<EmployeeMaster> EmployeeMaster { get; set; }
     public DbSet<Empl_Master_Dto> Empl_Master_Dto { get; set; }
 
     public DbSet<PlEmployeee> PlEmployeees { get; set; }

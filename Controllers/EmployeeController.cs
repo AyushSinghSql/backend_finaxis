@@ -165,4 +165,43 @@ public class EmployeeController : ControllerBase
         }
     }
 
+
+    [HttpPost("CreateEmployeeInMastaer")]
+    public async Task<IActionResult> CreateEmployeeInMastaer([FromBody] EmployeeMaster employee)
+    {
+        if (employee == null)
+            return BadRequest();
+
+        await _context.EmployeeMaster.AddAsync(employee);
+        await _context.SaveChangesAsync();
+
+        return Ok(employee);
+    }
+
+    [HttpGet("GetEmployeeInMastaer/{empl_id}")]
+    public async Task<IActionResult> GetOrganization(string empl_id)
+    {
+        var org = await _context.EmployeeMaster
+            .FirstOrDefaultAsync(o => o.EmplId == empl_id);
+
+        if (org == null)
+            return NotFound("Organization not found");
+
+        return Ok(org);
+    }
+
+    [HttpDelete("DeleteEmployeeInMastaer/{empl_id}")]
+    public async Task<IActionResult> DeleteOrganization(string empl_id)
+    {
+        var emp = await _context.EmployeeMaster.FindAsync(empl_id);
+
+        if (emp == null)
+            return NotFound("Employee not found");
+
+        _context.EmployeeMaster.Remove(emp);
+        await _context.SaveChangesAsync();
+
+        return Ok("Employee deleted successfully");
+    }
+
 }
